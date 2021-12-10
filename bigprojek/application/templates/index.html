@@ -1,0 +1,34 @@
+{% extends 'includes/include.html' %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body style="background: #f5f6f8;">
+    <div class="containers">
+        <div class="row">
+            <center>
+                <div class="col-lg-6" style="margin-left:90px;margin-top:-15px">
+                    <img id="cam" src="{{ url_for('video_feed') }}" width="700px" height="500px">
+                </div>
+                <br>
+                <span style="font-size:16px">*Jika anda tamu, silahkan klik tombol ini</span>
+                <a href="/tamu"><button class="btn btn-primary">Isi Form</button></a>
+            </center>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

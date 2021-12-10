@@ -1,0 +1,10 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.dataset {
+    width: 100%;
+    margin-left: 15%;
+}
