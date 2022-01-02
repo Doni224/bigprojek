@@ -1,0 +1,20 @@
+{% extends 'includes/include.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="daftarKaryawan">
+        <h2>Preprosesing</h2>
+        <form method="post" action="/preproses">
+            <hr>
+            <div>
+                <label for="karyawan">Masukkan nama karyawan</label>
+                <input class="form-control" type="text" name="karyawan" required><br>
+                <a style="margin-left:21px;"><br>
+                    <button type="submit" class="btn btn-primary">Mulai</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

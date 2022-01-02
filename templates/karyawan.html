@@ -1,0 +1,69 @@
+{% extends 'includes/include.html' %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="../../static/css/dataset.css">
+</head>
+{% include "includes/sidebar.html" %}
+
+<div class="container">
+    <div class="daftarKaryawan">
+        <!-- {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">×</span></button>
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %} -->
+        <!-- <input class="form-control" type="text" name="karyawan" placeholder="Nama Karyawan" required> -->
+        <div class="d-flex" style="justify-content: space-between">
+            <a href="/tambahData" style="margin-left:21px;">
+                <button type="submit" class="btn btn-primary">Tambah Data</button>
+            </a>
+            <div class="d-flex">
+                <a href="/preproses" style="margin-left:21px;">
+                    <button type="submit" class="btn btn-warning">Preprosesing</button>
+                </a>
+                <a href="/trainingKaryawan" style="margin-left:21px;">
+                    <button type="submit" class="btn btn-danger">Training</button>
+                </a>
+            </div>
+        </div>
+        <h3 style="color:#333;margin-top:40px;font-weight:500">Daftar Karyawan</h3>
+        <table style="margin-top:20px;" class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th width="25%">Nama Lengkap</th>
+                    <th width="25%">Email</th>
+                    <th width="20%">No Telepon</th>
+                    <th width="25%">Alamat</th>
+                    <th width="5%">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in karyawan %}
+                <tr>
+                    <td>{{data.nama_lengkap}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.no_telp}}</td>
+                    <td>{{data.alamat}}</td>
+                    <td width="100">
+                        <div class="d-flex" style="justify-content: space-between">
+                            <a href="/editKaryawan/{{data.id}}" style="margin-right:32px">
+                                <i style="font-size:16px" class="fa fa-edit text-warning" aria-hidden="true"></i></a>
+                            <a href="/hapusKaryawan/{{data.id}}">
+                                <i style="font-size:16px" class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>DataTable AJAX pagination using Python Flask and Mysql database</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link href='https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="padding:50px;">
+            <p>
+                <h1>DataTable AJAX pagination using Python Flask and Mysql database</h1>
+            </p>
+            <div>
+                <table id='empTable' class='display dataTable' width='100%'>
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Nama Lengkap</th>
+                            <th>Instansi</th>
+                            <th>No Telepon</th>
+                            <th>Keperluan</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $(document).ready(function () {
+                $.datepicker.setDefaults({
+                    dateFormat: 'yy-mm-dd'
+                });
+                $(function () {
+                    $("#From").datepicker();
+                    $("#to").datepicker();
+                });
+                $('#range').click(function () {
+                    var From = $('#From').val();
+                    var to = $('#to').val();
+                    if (From != '' && to != '') {
+                        $.ajax({
+                            url: "/range",
+                            method: "POST",
+                            data: {
+                                From: From,
+                                to: to
+                            },
+                            success: function (data) {
+                                $('#filter_tanggal').html(data);
+                                $('#filter_tanggal').append(data.htmlresponse);
+                            }
+                        });
+                    } else {
+                        alert("Mohon Pilih Tanggal");
+                    }
+                });
+            });
+
+            var empDataTable = $('#empTable').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url': '/ajaxfile'
+                },
+                'lengthMenu': [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
+                searching: true,
+                sort: false,
+                "serverSide": true,
+                'columns': [{
+                        data: 'tanggal'
+                    }, {
+                        data: 'waktu'
+                    }, {
+                        data: 'nama_lengkap'
+                    },
+                    {
+                        data: 'instansi'
+                    },
+                    {
+                        data: 'no_telp'
+                    },
+                    {
+                        data: 'keperluan'
+                    },
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>

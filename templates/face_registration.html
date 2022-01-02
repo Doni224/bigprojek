@@ -1,0 +1,59 @@
+{% extends 'includes/includeKaryawan.html' %}
+
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="../../static/css/dataset.css">
+</head>
+{% include "includes/sidebar.html" %}
+<div class="container">
+    <div class="daftarKaryawan">
+        <div class="jumbotron">
+            <h3>Rekam Wajah</h3>
+            <div class="row">
+                <div class="col-sm-8 row">
+                    <div class="col-sm-12">
+                        <div id="my_camera" class="rounded mb-3" style="width:320px; height:240px;"></div>
+                    </div>
+                    <div class="col-sm-12">
+                        <input id="class_name" type="text" placeholder="Nama Lengkap"
+                            class="form-control form-control-sm">
+                    </div>
+                    <div style="margin-top:16px;" class="col-sm-12 text-white">
+                        <a id="open_camera" class="btn btn-dark">Nyalakan Kamera</span></a>
+                        <a style="margin-left:16px;" id="capture_photo" class="btn btn-danger"><span>Rekam</span></a>
+                        <a style="margin-left:16px;" href="/popuptambah" id="close_camera"
+                            class="btn btn-success"><span>Simpan</span></a>
+                    </div>
+                </div>
+                <div id="my_result" class="col-sm-7"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $("#open_camera").click(function (event) {
+        Webcam.attach('#my_camera');
+    });
+    $("#capture_photo").click(function (event) {
+        Webcam.snap(function (data_uri) {
+            var content = $('#my_result').html();
+            $('#my_result').html('<img src="' + data_uri + '" style="width:80px; height:60px;"/>' +
+                content);
+
+            var class_name = $('#class_name').val();
+            Webcam.upload(data_uri, "/uploadFoto?class_name=" + class_name, function (code, text) {
+                console.log('upload photo', code, text);
+            });
+        });
+    });
+
+    $("#close_camera").click(function (event) {
+        $('#my_result').html('');
+        Webcam.reset();
+    });
+</script>
+{% endblock %}

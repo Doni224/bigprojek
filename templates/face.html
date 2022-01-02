@@ -1,0 +1,34 @@
+{% block content %}
+
+<head>
+    <style>
+        .darman {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 25px;
+            margin-left: 25px;
+        }
+        /* .chabot{
+            position:absolute;
+            top:85%;
+            left:85%;
+        } */
+    </style>
+</head>
+<center>
+    <div class="col-lg-6" style="margin-left:170px;margin-top:60px">
+        <div class="darman" style="width:700px;height:500px;background:#fff;border-radius: 12px;">
+            <img id="cam" src="{{ url_for('video_feed') }}" width="650px" height="450px" style="border-radius:12px">
+        </div>
+            <!-- <img class="chabot" src="../static/img/chatbot.png" alt=""> -->
+    </div>
+    <br>
+
+</center>
+{% endblock %}
